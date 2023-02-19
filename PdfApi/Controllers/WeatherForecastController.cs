@@ -121,9 +121,16 @@ namespace PdfApi.Controllers
         public async Task<ActionResult> Get6()
         {
             var html = """
+            <head>
+                        <link rel="preconnect" href="https://fonts.googleapis.com">
+                        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                        <link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
+            </head>
                 <style>
                         html, body {
                             -webkit-print-color-adjust: exact !important;
+                            font-family: 'Gloock', serif;
+            
                         }
                 </style>
             <p>&nbsp;</p>
@@ -183,6 +190,8 @@ namespace PdfApi.Controllers
 
             await using var page = await browser.NewPageAsync();
             await page.SetContentAsync(html);
+            // wait for google font to load
+            await Task.Delay(1000);
 
             await page.PdfAsync("C:\\Users\\wierer\\Desktop\\DESKTOP\\file1.pdf");
 
