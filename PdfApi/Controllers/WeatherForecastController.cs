@@ -181,6 +181,33 @@ namespace PdfApi.Controllers
             return File(stream, "application/pdf");
         }
 
+        [HttpGet("7")]
+        public async Task<ActionResult> Get7()
+        {
+            var html = """
+                <style>
+                        html, body {
+                        margin: 0;
+                        padding: 0;
+                            -webkit-print-color-adjust: exact !important;
+                        }
+                </style>
+            <div style="display: flex">
+              <div>
+                blablabla
+              </div>
+              <div style="flex: 1; background: red">
+                2
+              </div>
+                <div>
+                blablabla
+              </div>
+            </div>
+            """;
+            var stream = await GetHtmlStream(html);
+            return File(stream, "application/pdf");
+        }
+
         private async Task<Stream> GetHtmlStream(string html)
         {
             var browserFetcher = new BrowserFetcher();
