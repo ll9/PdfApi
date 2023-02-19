@@ -27,6 +27,18 @@ namespace PdfApi.Controllers
             return File(stream, "application/pdf");
         }
 
+
+        [HttpGet("2")]
+        public async Task<ActionResult> Get2()
+        {
+            var html = """
+               <h1 style="color: red; margin-left: 10px; background: blue">bla</h1>
+               <p>This is <strong>important</strong></p>
+            """;
+            var stream = await GetHtmlStream(html);
+            return File(stream, "application/pdf");
+        }
+
         [HttpGet("3")]
         public async Task<ActionResult> Get3()
         {
@@ -52,12 +64,24 @@ namespace PdfApi.Controllers
             return File(stream, "application/pdf");
         }
 
-        [HttpGet("2")]
-        public async Task<ActionResult> Get2()
+        [HttpGet("4")]
+        public async Task<ActionResult> Get4()
         {
             var html = """
-               <h1 style="color: red; margin-left: 10px; background: blue">bla</h1>
-               <p>This is <strong>important</strong></p>
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <style>
+                        html, body {
+                            -webkit-print-color-adjust: exact !important;
+                        }
+                </style>
+            </head>
+            <body>
+                <p style="background: red; color: white">Lipsum....</p>
+                <p style="background: blue">Lipsum....</p>
+            </body>
+            </html>
             """;
             var stream = await GetHtmlStream(html);
             return File(stream, "application/pdf");
@@ -72,6 +96,8 @@ namespace PdfApi.Controllers
 
             await using var page = await browser.NewPageAsync();
             await page.SetContentAsync(html);
+
+            await page.PdfAsync("C:\\Users\\wierer\\Desktop\\DESKTOP\\file1.pdf");
 
             return await page.PdfStreamAsync();
         }
