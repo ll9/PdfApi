@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+ï»¿using Microsoft.AspNetCore.Mvc;
 using PuppeteerSharp;
 
 namespace PdfApi.Controllers
@@ -22,7 +22,7 @@ namespace PdfApi.Controllers
         [HttpGet("1")]
         public async Task<ActionResult> Get()
         {
-            var html = "<h1>bla</h1>";
+            var html = "<h1>blaâœ“</h1>";
             var stream = await GetHtmlStream(html);
             return File(stream, "application/pdf");
         }
@@ -612,7 +612,7 @@ namespace PdfApi.Controllers
             				<span class="exp">+ 5 years</span>
             				<div>
             					<h3>Object programming & frameworks</h3>
-            					<span>PHP, Symfony, Laravel, Silex, …</span>
+            					<span>PHP, Symfony, Laravel, Silex, â€¦</span>
             				</div>
             			</div>
 
@@ -735,7 +735,7 @@ namespace PdfApi.Controllers
             		    <p class="line">Education</p>
             		    <span class="point"></span>
             		    <p class="description">
-            		      DUT "Métiers du multimédia et de l'internet"
+            		      DUT "MÃ©tiers du multimÃ©dia et de l'internet"
             		    </p>
             		    <span class="date">2015 - 2013</span>
             		  </li>
